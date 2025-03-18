@@ -1,7 +1,7 @@
 # RustFund
 
 
-### Prize Pool TO BE FILLED OUT BY CYFRIN
+### Details
 
 - Starts: March 20, 2025 Noon UTC
 - Ends: March 27, 2025 Noon UTC
