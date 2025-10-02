@@ -1,36 +1,50 @@
-# 📘 Índice del tutorial `rustfund`
-
-### **Parte A – Declaraciones (estructuras, cuentas y enums)**
-
-Estas son las dependencias necesarias para que el programa compile y pueda ejecutar su lógica:
-
-1. `FundCreate<'info>` – contexto de creación de un fondo.
-2. `FundContribute<'info>` – contexto de contribución a un fondo.
-3. `FundSetDeadline<'info>` – contexto para establecer fecha límite.
-4. `FundRefund<'info>` – contexto para reembolso a un contribuidor.
-5. `FundWithdraw<'info>` – contexto para retiro de fondos por el creador.
-6. `Contribution` – estructura de cuenta que guarda contribuciones individuales.
-7. `Fund` – estructura de cuenta que representa un fondo con sus datos.
-8. `ErrorCode` – enumerador de errores personalizados del programa.
+Perfecto ✅, entonces el nuevo orden del tutorial será:
 
 ---
 
-### **Parte B – Funciones del programa (`pub mod rustfund`)**
+## Índice del tutorial `minimal_counter` (nuevo orden)
 
-Una vez entendido lo anterior, se pasa a la lógica de negocio:
+### A) Dependencias y configuraciones iniciales
 
-1. `fund_create` – inicializa un nuevo fondo.
-2. `contribute` – permite a un usuario contribuir a un fondo.
-3. `set_deadline` – fija la fecha límite de un fondo.
-4. `refund` – devuelve fondos a los contribuidores si corresponde.
-5. `withdraw` – transfiere los fondos recaudados al creador.
+1. `use anchor_lang::prelude::*;` → qué importa y por qué
+2. `declare_id!` → qué hace, cómo se usa
 
----
+### D) Structs persistentes (`#[account]`)
 
-📌 Propuesta de flujo de explicación:
+1. `Counter`
 
-* Empezamos con la **Parte A** (estructuras, contextos, enums).
-* Cada declaración la vemos **en un punto independiente**: explicamos qué es, cómo funciona en Rust, y qué papel juega en Solana/Anchor.
-* Cuando terminemos todas, pasamos a la **Parte B** (funciones) con la misma metodología.
+   * Campo `value`
+   * Cómo Anchor serializa en la cuenta
+   * Espacio en bytes (`8 + 8`)
 
----
+### C) Contextos de cuentas (`#[derive(Accounts)]`)
+
+1. `Initialize<'info>`
+
+   * Campos: `counter`, `user`, `system_program`
+   * Macro de atributo `#[account(...)]` y sus parámetros (`init`, `payer`, `space`, `mut`)
+2. `SetValue<'info>`
+
+   * Campo `counter` y `mut`
+
+### B) Programa principal
+
+1. `#[program] pub mod minimal_counter { ... }`
+
+   * Qué significa `#[program]`
+   * Estructura del módulo y uso de `use super::*;`
+2. Funciones del programa
+
+   * `initialize`
+   * `set_value`
+
+### E) Flujo de transacción y almacenamiento
+
+1. Cómo se crea la cuenta PDA en `initialize`
+2. Cómo se modifica en `set_value`
+3. Quién puede leer/escribir la cuenta
+
+### F) Comparaciones con Solidity/EVM
+
+* Owner, almacenamiento, permisos
+* Similitudes y diferencias con `msg.sender`, `storage` y `contract`
